@@ -1,0 +1,18 @@
+---
+import Band from './Band.astro';
+import Icon from './Icon.astro';
+---
+
+<Band id="sister-project" surface="feature" label="Shared direction">
+  <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+    <h2 id="sister-project-heading" class="font-display text-3xl font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem]">Learning Tokens</h2>
+    <div class="space-y-7">
+      <p class="font-display text-xl font-medium leading-snug tracking-tight sm:text-2xl">Learning Tokens explores portable evidence of learning. Talent Angels maps the skills, occupations, and possible pathways around that evidence. Together, they connect recognised learning with navigable opportunity.</p>
+      <p class="text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">Both projects are developed within the LF Decentralized Trust community as complementary directions of work.</p>
+      <div class="flex flex-wrap gap-3">
+        <a href="https://hyperledger-labs.github.io/learning-tokens/" target="_blank" rel="noreferrer noopener" class="inline-flex min-h-11 items-center gap-2 border border-border px-4 py-2.5 text-sm font-medium transition-colors hover:border-gold-action hover:text-gold-text">Website <Icon name="external" class="h-3.5 w-3.5" /></a>
+        <a href="https://github.com/hyperledger-labs/learning-tokens" target="_blank" rel="noreferrer noopener" class="inline-flex min-h-11 items-center gap-2 border border-border px-4 py-2.5 text-sm font-medium transition-colors hover:border-gold-action hover:text-gold-text"><Icon name="github" /> Repository <Icon name="external" class="h-3.5 w-3.5" /></a>
+      </div>
+    </div>
+  </div>
+</Band>

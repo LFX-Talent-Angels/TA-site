@@ -1,0 +1,30 @@
+---
+import GraphField from './GraphField.astro';
+import Icon from './Icon.astro';
+---
+
+<section class="surface-canvas texture-grid px-5 pb-16 pt-24 sm:pb-24 sm:pt-36">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+    <div class="min-w-0">
+      <p class="label-tech text-gold-text">Open source · LF Decentralized Trust mentorship</p>
+      <h1 class="mt-6 font-display text-[2.5rem] font-bold leading-[1.02] tracking-tight sm:text-[4rem]">
+        Find where your skills <span class="text-gold-text sm:block">can take you.</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground sm:text-lg">
+        Talent Angels is a conversational assistant for understanding skills, occupations and the relationships between them. It uses graph-based retrieval to help you locate concepts across global workforce taxonomies, explore what they connect to, and trace possible pathways from where you are to where you want to go.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="#capabilities" class="inline-flex min-h-11 items-center gap-2 border border-gold-action bg-gold-action px-5 py-3 text-sm font-medium text-on-gold transition-opacity hover:opacity-90">Explore capabilities</a>
+        <a href="https://github.com/LFX-Talent-Angels" target="_blank" rel="noreferrer noopener" class="inline-flex min-h-11 items-center gap-2 border border-border px-5 py-3 text-sm font-medium transition-colors hover:border-gold-action hover:text-gold-text">
+          <Icon name="github" />
+          View on GitHub
+          <Icon name="external" class="h-3.5 w-3.5" />
+        </a>
+      </div>
+    </div>
+    <div class="min-w-0 border border-border bg-surface p-5 sm:p-7">
+      <GraphField />
+      <p class="label-tech mt-5">From skill to opportunity</p>
+    </div>
+  </div>
+</section>

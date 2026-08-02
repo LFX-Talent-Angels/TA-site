@@ -1,0 +1,152 @@
+---
+import Icon from './Icon.astro';
+import Mark from './Mark.astro';
+
+const links = [
+  { href: '#about', label: 'About' },
+  { href: '#capabilities', label: 'Capabilities' },
+  { href: '#audiences', label: 'Who it serves' },
+  { href: '#taxonomies', label: 'Taxonomies' },
+  { href: '#open-source', label: 'Architecture' },
+  { href: '#team', label: 'Open' },
+];
+---
+
+<header class="site-header fixed inset-x-0 top-0 z-50 border-b transition-colors" data-site-header data-scrolled="false" data-menu-open="false">
+  <nav aria-label="Primary" class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-2.5">
+    <a href="#top" class="min-w-0 py-2" aria-label="Talent Angels home">
+      <Mark wordmark />
+    </a>
+
+    <div class="hidden items-center gap-6 lg:flex">
+      {links.map((link) => (
+        <a href={link.href} class="nav-link label-tech border-b-2 border-transparent py-1 transition-colors hover:text-foreground" data-section-link>
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="https://github.com/LFX-Talent-Angels"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="label-tech inline-flex min-h-11 items-center gap-2 border border-border px-3 text-foreground transition-colors hover:border-gold-action hover:text-gold-text"
+      >
+        <Icon name="github" />
+        GitHub
+      </a>
+      <button
+        type="button"
+        data-theme-toggle
+        class="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-2 border border-border px-3 text-foreground transition-colors hover:border-gold-action hover:text-gold-text"
+      >
+        <span data-theme-icon="day"><Icon name="sun" /></span>
+        <span data-theme-icon="night" hidden><Icon name="moon" /></span>
+        <span class="label-tech hidden text-foreground xl:inline" data-theme-label>Day</span>
+      </button>
+    </div>
+
+    <div class="flex items-center gap-2 lg:hidden">
+      <button
+        type="button"
+        data-theme-toggle
+        class="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center border border-border px-3 text-foreground transition-colors hover:border-gold-action hover:text-gold-text"
+      >
+        <span data-theme-icon="day"><Icon name="sun" /></span>
+        <span data-theme-icon="night" hidden><Icon name="moon" /></span>
+      </button>
+      <button
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        class="label-tech inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center border border-border px-3 text-foreground"
+      >
+        <span data-menu-label>Menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobile-nav" class="border-t border-border bg-background lg:hidden" hidden data-mobile-nav>
+    <ul class="mx-auto flex max-w-6xl flex-col px-5 py-2">
+      {links.map((link) => (
+        <li>
+          <a href={link.href} class="label-tech flex min-h-11 items-center border-b border-border py-3 hover:text-foreground" data-mobile-link>
+            {link.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a href="https://github.com/LFX-Talent-Angels" target="_blank" rel="noreferrer noopener" class="label-tech flex min-h-11 items-center gap-2 py-3 hover:text-foreground" data-mobile-link>
+          <Icon name="github" />
+          GitHub
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const themeKey = 'talent-angels-theme';
+  const root = document.documentElement;
+  const themeButtons = document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]');
+
+  function updateThemeButtons(theme: 'day' | 'night') {
+    const action = theme === 'night' ? 'Switch to day theme' : 'Switch to night theme';
+    themeButtons.forEach((button) => {
+      button.setAttribute('aria-label', action);
+      button.setAttribute('title', action);
+      button.querySelectorAll<HTMLElement>('[data-theme-icon]').forEach((icon) => {
+        icon.hidden = icon.dataset.themeIcon !== theme;
+      });
+      const label = button.querySelector<HTMLElement>('[data-theme-label]');
+      if (label) label.textContent = theme === 'night' ? 'Night' : 'Day';
+    });
+  }
+
+  const initialTheme = root.dataset.theme === 'night' ? 'night' : 'day';
+  updateThemeButtons(initialTheme);
+
+  themeButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const next = root.dataset.theme === 'night' ? 'day' : 'night';
+      root.classList.add('theme-transition');
+      root.dataset.theme = next;
+      try { localStorage.setItem(themeKey, next); } catch {}
+      updateThemeButtons(next);
+      window.setTimeout(() => root.classList.remove('theme-transition'), 260);
+    });
+  });
+
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const mobileNav = document.querySelector<HTMLElement>('[data-mobile-nav]');
+
+  function setMenu(open: boolean) {
+    if (!header || !menuButton || !mobileNav) return;
+    header.dataset.menuOpen = String(open);
+    menuButton.setAttribute('aria-expanded', String(open));
+    mobileNav.hidden = !open;
+    const label = menuButton.querySelector<HTMLElement>('[data-menu-label]');
+    if (label) label.textContent = open ? 'Close' : 'Menu';
+  }
+
+  menuButton?.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
+  document.querySelectorAll('[data-mobile-link]').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
+
+  const updateScrolled = () => { if (header) header.dataset.scrolled = String(window.scrollY > 12); };
+  updateScrolled();
+  window.addEventListener('scroll', updateScrolled, { passive: true });
+
+  const sectionLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-section-link]'));
+  const sections = sectionLinks
+    .map((link) => document.getElementById(link.hash.slice(1)))
+    .filter((section): section is HTMLElement => Boolean(section));
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+    if (!visible) return;
+    sectionLinks.forEach((link) => link.setAttribute('aria-current', String(link.hash === `#${visible.target.id}`)));
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach((section) => observer.observe(section));
+</script>

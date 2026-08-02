@@ -20,15 +20,16 @@ The landing page is **not** the chat frontend. It lives apart from
 - **Third-party scripts** (waitlist, analytics) belong here, not next to the
   assistant runtime.
 
-This amends the repo topology in `ADR-0004`; the decision is recorded in
-`ADR-0007` in
-[`TA-workspace/docs/decisions/`](https://github.com/LFX-Talent-Angels/TA-workspace/tree/main/docs/decisions).
-
 ## What goes here
 
 - The landing page: markup, styles, assets, copy.
-- Waitlist / demand-signal capture and site analytics.
+- Public community links and future demand-signal integrations.
 - Deploy configuration for the site.
+
+The current landing page channels community interaction through the public
+Talent Angels GitHub organization, where contributors can follow the work and
+participate through issues and pull requests. Waitlist capture and analytics
+are deferred until the team defines a concrete need and privacy-safe setup.
 
 ## What does **not** go here
 
@@ -42,8 +43,50 @@ This amends the repo topology in `ADR-0004`; the decision is recorded in
 
 ## Status
 
-Sprint 4 deliverable. **Stack and deploy target not chosen yet** — pick them in
-the first PR and say why in the PR description.
+This repository contains the static Talent Angels landing-page implementation.
+It uses Astro, Tailwind CSS 4 through its Vite plugin, TypeScript checking, and
+npm with a committed lockfile. Deployment configuration is delivered through a
+separate, focused pull request.
+
+## Stack decision
+
+Astro fits a content-first landing page because it produces static HTML while
+keeping each section in a focused component. Tailwind CSS supplies the shared
+design tokens and responsive utilities without turning the site into a
+client-side application.
+
+Plain HTML and CSS would reduce the toolchain but make the growing set of page
+sections and shared behavior less structured. React with Vite would provide a
+large component ecosystem, but this site does not need application state,
+client-side routing, or a browser framework runtime; that work belongs in
+`TA-app`.
+
+GitHub Pages is the deployment target because it is a natural fit for Astro's
+static output, keeps hosting and review within the project's existing GitHub
+workflow, and follows the precedent set by the Learning Tokens landing page.
+An external platform such as Vercel or Cloudflare Pages could provide additional
+deployment features, but would introduce another service and configuration
+surface that this static site does not currently need.
+
+## Local development
+
+Use Node.js 24 (Astro requires Node.js 22.12 or newer) and npm 9.6.5 or newer.
+
+```bash
+npm ci
+npm run dev
+```
+
+Before submitting a change, run:
+
+```bash
+npm run check
+npm run build
+```
+
+Use `npm run preview` to inspect the generated static site locally. Build
+output, installed dependencies, Astro caches, local environment files, and
+secrets must not be committed.
 
 ## Contributing
 

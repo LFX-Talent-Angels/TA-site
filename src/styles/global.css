@@ -1,0 +1,252 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-gold-action: var(--gold-action);
+  --color-gold-text: var(--gold-text);
+  --color-on-gold: var(--on-gold);
+  --color-graph-mint: var(--graph-mint);
+  --color-graph-cyan: var(--graph-cyan);
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+:root {
+  --ink: oklch(0.195 0.012 99.5);
+  --basalt: oklch(0.277 0.009 88.8);
+  --paper: oklch(0.911 0.027 95.4);
+  --bone: oklch(0.952 0.018 92.7);
+  --ochre: oklch(0.651 0.09 84.7);
+  --gilt: oklch(0.731 0.112 84.4);
+  --terracotta: oklch(0.539 0.151 39.1);
+  --mint-lum: oklch(0.78 0.09 158);
+  --cyan-lum: oklch(0.79 0.075 195);
+  --mint-deep: oklch(0.5 0.09 158);
+  --cyan-deep: oklch(0.49 0.075 210);
+  --ochre-deep: oklch(0.47 0.082 78);
+  --background: var(--bone);
+  --foreground: var(--ink);
+  --surface: var(--paper);
+  --muted-foreground: oklch(0.42 0.014 90);
+  --border: oklch(0.195 0.012 99.5 / 20%);
+  --line: var(--border);
+  --gold-action: var(--ochre);
+  --gold-text: var(--ochre-deep);
+  --on-gold: var(--ink);
+  --graph-mint: var(--mint-deep);
+  --graph-cyan: var(--cyan-deep);
+  color-scheme: light;
+}
+
+[data-theme='night'] {
+  --background: var(--ink);
+  --foreground: var(--bone);
+  --surface: var(--basalt);
+  --muted-foreground: oklch(0.79 0.015 92);
+  --border: oklch(0.952 0.018 92.7 / 20%);
+  --line: var(--border);
+  --gold-action: var(--gilt);
+  --gold-text: var(--gilt);
+  --on-gold: var(--ink);
+  --graph-mint: var(--mint-lum);
+  --graph-cyan: var(--cyan-lum);
+  color-scheme: dark;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6.5rem;
+    background: var(--background);
+  }
+
+  body {
+    min-width: 320px;
+    margin: 0;
+    overflow-x: hidden;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--gold-text);
+    outline-offset: 3px;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+.surface-canvas,
+.surface-raised,
+.surface-reading,
+.surface-feature,
+.surface-cta {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+html:not([data-theme='night']) .surface-canvas,
+html:not([data-theme='night']) .surface-raised,
+html:not([data-theme='night']) .surface-reading,
+[data-theme='night'] .surface-reading {
+  --background: var(--bone);
+  --foreground: var(--ink);
+  --surface: var(--paper);
+  --muted-foreground: oklch(0.42 0.014 90);
+  --border: oklch(0.195 0.012 99.5 / 20%);
+  --line: var(--border);
+  --gold-action: var(--ochre);
+  --gold-text: var(--ochre-deep);
+  --on-gold: var(--ink);
+  --graph-mint: var(--mint-deep);
+  --graph-cyan: var(--cyan-deep);
+}
+
+html:not([data-theme='night']) .surface-feature,
+html:not([data-theme='night']) .surface-cta,
+[data-theme='night'] .surface-canvas,
+[data-theme='night'] .surface-raised,
+[data-theme='night'] .surface-feature,
+[data-theme='night'] .surface-cta {
+  --background: var(--ink);
+  --foreground: var(--bone);
+  --surface: var(--basalt);
+  --muted-foreground: oklch(0.79 0.015 92);
+  --border: oklch(0.952 0.018 92.7 / 20%);
+  --line: var(--border);
+  --gold-action: var(--gilt);
+  --gold-text: var(--gilt);
+  --on-gold: var(--ink);
+  --graph-mint: var(--mint-lum);
+  --graph-cyan: var(--cyan-lum);
+}
+
+html:not([data-theme='night']) .surface-raised,
+[data-theme='night'] .surface-reading {
+  --background: var(--paper);
+}
+
+[data-theme='night'] .surface-raised,
+[data-theme='night'] .surface-feature {
+  --background: var(--basalt);
+}
+
+.texture-grid,
+.texture-constellation {
+  position: relative;
+  isolation: isolate;
+}
+
+.texture-grid::before,
+.texture-constellation::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+}
+
+.texture-grid::before {
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 88px 88px;
+  opacity: 0.5;
+}
+
+.texture-constellation::before {
+  background-image: radial-gradient(var(--graph-cyan) 1px, transparent 1.2px);
+  background-size: 46px 46px;
+  opacity: 0.14;
+}
+
+.label-tech {
+  color: var(--muted-foreground);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.site-header {
+  background: color-mix(in oklch, var(--background) 70%, transparent);
+  border-color: transparent;
+  backdrop-filter: blur(8px);
+}
+
+.site-header[data-scrolled='true'],
+.site-header[data-menu-open='true'] {
+  background: color-mix(in oklch, var(--background) 95%, transparent);
+  border-color: var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.nav-link[aria-current='true'] {
+  border-color: var(--gold-action);
+  color: var(--foreground);
+}
+
+.theme-transition,
+.theme-transition * {
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease;
+}
+
+.node-pulse {
+  animation: node-pulse 4s ease-in-out infinite;
+}
+
+.dash-flow {
+  stroke-dasharray: 6 10;
+  animation: dash-flow 16s linear infinite;
+}
+
+@keyframes node-pulse {
+  0%,
+  100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -220; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .theme-transition,
+  .theme-transition * { transition: none !important; }
+  .dash-flow {
+    stroke-dasharray: none;
+    animation: none !important;
+  }
+}

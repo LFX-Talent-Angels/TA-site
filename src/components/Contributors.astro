@@ -1,0 +1,30 @@
+---
+import Band from './Band.astro';
+
+const mentors = [
+  { name: 'Alfonso Govela', role: 'Learning Tokens Lab, LF Decentralized Trust' },
+  { name: 'Enmanuel Amaya', role: 'UCA, El Salvador' },
+  { name: 'Alberto Ceballos', role: 'Danil AI' },
+  { name: 'Noemí Muñiz', role: 'Project and Product Manager' },
+];
+---
+
+<Band id="team" surface="raised" label="Built in the open">
+  <div class="grid gap-10 lg:grid-cols-2">
+    <h2 id="team-heading" class="font-display text-3xl font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem]">A mentorship project, developed in public.</h2>
+    <p class="text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">Talent Angels is developed in the open. Follow the work, contribute an idea, or help shape the shared language of skills and opportunity.</p>
+  </div>
+  <div class="mt-12">
+    <p class="label-tech">Mentors</p>
+    <ul class="mt-5 grid border-t border-border sm:grid-cols-2">
+      {mentors.map((mentor) => (
+        <li class="border-b border-border py-5 sm:pr-8">
+          <p class="font-display text-lg font-semibold tracking-tight">{mentor.name}</p>
+          <p class="mt-1 text-[0.95rem] text-muted-foreground">{mentor.role}</p>
+        </li>
+      ))}
+    </ul>
+    <p class="label-tech mt-8">2026 mentorship cohort</p>
+    <p class="mt-3 max-w-2xl text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">The project is built together with the 2026 mentorship cohort, whose contributions shape the reasoning layer, its interfaces and its documentation.</p>
+  </div>
+</Band>

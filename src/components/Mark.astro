@@ -1,0 +1,26 @@
+---
+interface Props {
+  class?: string;
+  wordmark?: boolean;
+}
+
+const { class: className = 'h-7 w-7', wordmark = false } = Astro.props;
+---
+
+<span class:list={['inline-flex min-w-0 items-center', wordmark && 'gap-2.5']}>
+  <svg
+    viewBox="0 0 32 32"
+    class:list={[className, 'shrink-0']}
+    role="img"
+    aria-label="Talent Angels mark: a compact route of graph nodes forming a T and A"
+  >
+    <path d="M6 7 H26" fill="none" stroke="var(--gold-action)" stroke-width="1.6" />
+    <path d="M16 7 V15 L10 26 M16 15 L22 26 M12.6 21.5 H19.4" fill="none" stroke="var(--graph-mint)" stroke-width="1.6" />
+    <rect x="4.6" y="5.6" width="2.8" height="2.8" fill="var(--graph-cyan)" />
+    <rect x="24.6" y="5.6" width="2.8" height="2.8" fill="var(--graph-cyan)" />
+    <rect x="14.4" y="13.4" width="3.2" height="3.2" fill="var(--gold-action)" />
+    <rect x="8.6" y="24.6" width="2.8" height="2.8" fill="var(--graph-cyan)" />
+    <rect x="20.6" y="24.6" width="2.8" height="2.8" fill="var(--gold-action)" />
+  </svg>
+  {wordmark && <span class="truncate font-display text-lg font-semibold tracking-tight">Talent Angels</span>}
+</span>

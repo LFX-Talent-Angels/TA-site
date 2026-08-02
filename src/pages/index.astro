@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Capabilities from '../components/Capabilities.astro';
+import Audiences from '../components/Audiences.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Taxonomies from '../components/Taxonomies.astro';
+import Architecture from '../components/Architecture.astro';
+import SisterProject from '../components/SisterProject.astro';
+import Contributors from '../components/Contributors.astro';
+import Community from '../components/Community.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Talent Angels — Find where your skills can take you';
+const description = 'Talent Angels is an open-source conversational assistant for locating, connecting and pathfinding skills, tasks and occupations across global workforce taxonomies.';
+---
+
+<Layout {title} {description}>
+  <div id="top" class="min-h-screen overflow-x-hidden bg-background text-foreground">
+    <Navbar />
+    <main>
+      <Hero />
+      <About />
+      <Capabilities />
+      <Audiences />
+      <HowItWorks />
+      <Taxonomies />
+      <Architecture />
+      <SisterProject />
+      <Contributors />
+      <Community />
+    </main>
+    <Footer />
+  </div>
+</Layout>

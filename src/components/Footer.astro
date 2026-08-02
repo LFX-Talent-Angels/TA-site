@@ -1,0 +1,54 @@
+---
+import Icon from './Icon.astro';
+import Mark from './Mark.astro';
+
+const projectLinks = [
+  ['About', '#about'],
+  ['Capabilities', '#capabilities'],
+  ['Who it serves', '#audiences'],
+  ['How it works', '#how-it-works'],
+  ['Taxonomies', '#taxonomies'],
+  ['Architecture', '#open-source'],
+];
+
+const externalLinks = [
+  ['GitHub organization', 'https://github.com/LFX-Talent-Angels'],
+  ['Learning Tokens', 'https://hyperledger-labs.github.io/learning-tokens/'],
+  ['LF Decentralized Trust', 'https://www.lfdecentralizedtrust.org/'],
+];
+---
+
+<footer class="surface-canvas border-t border-border">
+  <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="min-w-0">
+      <Mark wordmark />
+      <p class="mt-4 text-sm text-muted-foreground">An open-source assistant for navigating skills, tasks and occupations.</p>
+    </div>
+    <nav aria-label="Footer">
+      <p class="label-tech">Project</p>
+      <ul class="mt-4 space-y-2 text-sm">
+        {projectLinks.map(([label, href]) => <li><a href={href} class="text-muted-foreground hover:text-foreground">{label}</a></li>)}
+      </ul>
+    </nav>
+    <div>
+      <p class="label-tech">Links</p>
+      <ul class="mt-4 space-y-2 text-sm">
+        {externalLinks.map(([label, href]) => (
+          <li>
+            <a href={href} target="_blank" rel="noreferrer noopener" class="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground">
+              {label}
+              <Icon name="external" class="h-3 w-3" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <p class="label-tech">About the project</p>
+      <p class="mt-4 text-sm text-muted-foreground">Talent Angels is an open-source project developed as part of an LF Decentralized Trust mentorship. Taxonomy names are referenced for description only.</p>
+    </div>
+  </div>
+  <div class="border-t border-border">
+    <p class="mx-auto max-w-6xl px-5 py-6 text-xs text-muted-foreground">© {new Date().getFullYear()} Talent Angels contributors.</p>
+  </div>
+</footer>
