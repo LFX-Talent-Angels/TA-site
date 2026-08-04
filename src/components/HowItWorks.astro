@@ -1,0 +1,22 @@
+---
+import Band from './Band.astro';
+
+const steps = [
+  { n: '01', title: 'Ask', body: 'Describe a skill, role or destination in natural language.' },
+  { n: '02', title: 'Ground', body: 'Connect that language to concepts and relationships in the knowledge graph.' },
+  { n: '03', title: 'Navigate', body: 'Return a clear location, connection or possible pathway.' },
+];
+---
+
+<Band id="how-it-works" surface="reading" label="How it works">
+  <h2 id="how-it-works-heading" class="max-w-2xl font-display text-3xl font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem]">From a plain question to a grounded answer.</h2>
+  <ol class="mt-12 space-y-px bg-border">
+    {steps.map((step) => (
+      <li class="grid gap-4 bg-background p-6 sm:grid-cols-[auto_10rem_1fr] sm:items-baseline sm:p-7">
+        <span class="font-mono text-sm text-gold-text">{step.n}</span>
+        <h3 class="font-display text-xl font-semibold tracking-tight">{step.title}</h3>
+        <p class="text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">{step.body}</p>
+      </li>
+    ))}
+  </ol>
+</Band>

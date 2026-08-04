@@ -1,0 +1,46 @@
+---
+const route = [
+  { x: 54, y: 196, label: 'Skill', anchor: true },
+  { x: 168, y: 128, label: 'Task' },
+  { x: 286, y: 158, label: 'Task' },
+  { x: 372, y: 66, label: 'Occupation', anchor: true },
+];
+const satellites = [
+  { x: 108, y: 62 },
+  { x: 236, y: 224 },
+  { x: 330, y: 214 },
+  { x: 216, y: 44 },
+];
+const linkPoints = route.map((node) => `${node.x},${node.y}`).join(' ');
+---
+
+<svg
+  viewBox="0 0 420 260"
+  class="h-full w-full"
+  role="img"
+  aria-label="A graph route running from a Skill node through two Task nodes to an Occupation node, with related concepts branching off the path"
+>
+  <g opacity="0.55" aria-hidden="true">
+    {[0, 1, 2, 3, 4].map((i) => <line x1="0" y1={i * 65} x2="420" y2={i * 65} stroke="var(--line)" stroke-width="1" />)}
+  </g>
+  <g aria-hidden="true">
+    {satellites.map((satellite, i) => {
+      const near = route[Math.min(i, route.length - 1)];
+      return (
+        <g>
+          <line x1={satellite.x} y1={satellite.y} x2={near.x} y2={near.y} stroke="var(--graph-cyan)" stroke-opacity="0.5" />
+          <rect x={satellite.x - 2.5} y={satellite.y - 2.5} width="5" height="5" fill="var(--graph-cyan)" class="node-pulse" style={`animation-delay:${i * 0.6}s`} />
+        </g>
+      );
+    })}
+    <polyline points={linkPoints} fill="none" stroke="var(--graph-mint)" stroke-width="2" />
+    <polyline points={linkPoints} fill="none" stroke="var(--gold-action)" stroke-width="2" class="dash-flow" />
+    {route.map((node) => (
+      <g>
+        <rect x={node.x - (node.anchor ? 5 : 3.5)} y={node.y - (node.anchor ? 5 : 3.5)} width={node.anchor ? 10 : 7} height={node.anchor ? 10 : 7} fill={node.anchor ? 'var(--gold-action)' : 'var(--graph-mint)'} />
+        {node.anchor && <rect x={node.x - 12} y={node.y - 12} width="24" height="24" fill="none" stroke="var(--gold-action)" stroke-width="0.9" stroke-opacity="0.75" />}
+        <text x={node.x} y={node.y + (node.anchor ? 30 : 24)} text-anchor="middle" fill="var(--foreground)" font-size="11" font-family="IBM Plex Mono, monospace" letter-spacing="1.4">{node.label.toUpperCase()}</text>
+      </g>
+    ))}
+  </g>
+</svg>

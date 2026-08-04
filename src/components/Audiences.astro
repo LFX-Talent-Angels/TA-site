@@ -1,0 +1,23 @@
+---
+import Band from './Band.astro';
+import Icon from './Icon.astro';
+
+const audiences = [
+  { title: 'Learners', icon: 'compass', body: 'Understand how existing skills relate to possible next steps.' },
+  { title: 'Educators', icon: 'education', body: 'Connect learning outcomes with shared skill and occupation frameworks.' },
+  { title: 'Builders', icon: 'wrench', body: 'Create CLI, API and UI experiences over an open reasoning layer.' },
+];
+---
+
+<Band id="audiences" surface="reading" label="Who it serves" divided={false}>
+  <h2 id="audiences-heading" class="max-w-2xl font-display text-3xl font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem]">Written for three kinds of reader.</h2>
+  <div class="mt-12 grid gap-10 md:grid-cols-3 md:gap-12">
+    {audiences.map((audience) => (
+      <div class="border-t border-border pt-6">
+        <Icon name={audience.icon} class="h-[19px] w-[19px] text-graph-cyan" />
+        <h3 class="mt-4 font-display text-xl font-semibold tracking-tight">{audience.title}</h3>
+        <p class="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">{audience.body}</p>
+      </div>
+    ))}
+  </div>
+</Band>

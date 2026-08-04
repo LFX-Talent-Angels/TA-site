@@ -15,8 +15,10 @@ working in `TA-site`, the public landing page of Talent Angels.
 - **Landing page only.** Not the chat frontend (`TA-app`), not the runtime
   (`TA-agents`), not taxonomies (`TA-taxonomies`).
 - Keep it static. Never call the FastAPI edge or the graphs from here.
-- The stack and deploy target are undecided — choose them in a PR that explains
-  the tradeoff, don't scaffold a framework silently.
+- Use the selected static stack: Astro, Tailwind CSS 4 through its Vite plugin,
+  TypeScript checking, and npm with a committed lockfile.
+- GitHub Pages is the deployment target. Keep deployment configuration focused
+  and do not introduce a server or separate hosting dependency.
 - Personal research and notes go in `TA-lab/mentees/<handle>/`, not here.
 - Fork or branch, then PR. Every commit DCO signed-off (`git commit -s`). Never
   push to `main`. Never commit `.env*` files, analytics keys, or secrets.

@@ -1,0 +1,27 @@
+---
+import Band from './Band.astro';
+
+const taxonomies = [
+  { name: 'ESCO', scope: 'Europe', note: 'European skills, competences and occupations' },
+  { name: 'O*NET', scope: 'United States', note: 'Occupational information network' },
+  { name: 'SFIA', scope: 'Global · digital', note: 'Skills-framework structure without licensed content' },
+  { name: 'BLS', scope: 'United States', note: 'Occupational classifications and economic signals' },
+  { name: 'JobTech', scope: 'Sweden', note: 'Open taxonomy and labour-market signal' },
+];
+---
+
+<Band id="taxonomies" surface="raised" label="Taxonomy ecosystem">
+  <div class="grid gap-10 lg:grid-cols-2">
+    <h2 id="taxonomies-heading" class="font-display text-3xl font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem]">Working across established public frameworks.</h2>
+    <p class="text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">Talent Angels reasons over widely used workforce taxonomies. Additional sources may be integrated over time, subject to licensing and access. These names are referenced for description only and do not imply endorsement by, or affiliation with, their owners.</p>
+  </div>
+  <ul class="mt-12 border-t border-border">
+    {taxonomies.map((taxonomy) => (
+      <li class="grid gap-1 border-b border-border py-5 sm:grid-cols-[8rem_11rem_1fr] sm:items-baseline sm:gap-6">
+        <p class="font-mono text-lg tracking-tight text-graph-cyan">{taxonomy.name}</p>
+        <p class="label-tech">{taxonomy.scope}</p>
+        <p class="text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">{taxonomy.note}</p>
+      </li>
+    ))}
+  </ul>
+</Band>

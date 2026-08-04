@@ -22,8 +22,10 @@ This is a **subrepo** of the Talent Angels workspace.
   `TA-app` or `TA-agents` instead.
 - Analytics and waitlist keys are **environment config**, never committed.
   Only `.env.example` with placeholders is committed.
-- The stack and deploy target are not chosen yet. Choose them in a PR that
-  explains the tradeoff; don't scaffold a framework silently.
+- The implementation stack is Astro with static output, Tailwind CSS 4 through
+  its Vite plugin, TypeScript checking, and npm with a committed lockfile.
+- GitHub Pages is the deployment target. Keep its workflow in a focused change
+  and do not introduce a server or a separate hosting dependency.
 
 ## Scope reminder
 

@@ -1,0 +1,33 @@
+---
+import Band from './Band.astro';
+import Icon from './Icon.astro';
+
+const architecture = [
+  { label: 'Interfaces', items: [{ name: 'CLI', icon: 'terminal' }, { name: 'API', icon: 'code' }, { name: 'UI', icon: 'panels' }] },
+  { label: 'Reasoning layer', items: [{ name: 'Main assistant + map-work skills', icon: 'route' }] },
+  { label: 'Sources', items: [{ name: 'Taxonomy knowledge graphs', icon: 'share' }, { name: 'Suite contract', icon: 'database' }] },
+];
+---
+
+<Band id="open-source" surface="canvas" label="Open architecture" texture="grid">
+  <h2 id="open-source-heading" class="max-w-3xl font-display text-3xl font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem]">An interface-agnostic reasoning layer, built in the open.</h2>
+  <p class="mt-6 max-w-2xl text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">Talent Angels separates graph reasoning from any one interface, so CLI, API and UI clients can use the same grounded capabilities over the same sources.</p>
+  <div class="mt-12 space-y-0">
+    {architecture.map((row, index) => (
+      <div>
+        <div class="border border-border bg-surface p-6 sm:p-8">
+          <p class="label-tech">{row.label}</p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            {row.items.map((item) => (
+              <span class="inline-flex items-center gap-2.5 border border-border px-4 py-2.5 font-mono text-sm">
+                <Icon name={item.icon} class="h-[18px] w-[18px] text-graph-mint" />
+                {item.name}
+              </span>
+            ))}
+          </div>
+        </div>
+        {index < architecture.length - 1 && <div aria-hidden="true" class="flex justify-center"><span class="h-8 w-px bg-graph-mint"></span></div>}
+      </div>
+    ))}
+  </div>
+</Band>

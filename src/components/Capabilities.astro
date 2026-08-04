@@ -1,0 +1,28 @@
+---
+import Band from './Band.astro';
+import Icon from './Icon.astro';
+
+const capabilities = [
+  { n: '01', title: 'Locate', icon: 'pin', body: 'Pinpoint a skill, task or occupation within the available taxonomies, even when you describe it in your own words.' },
+  { n: '02', title: 'Connect', icon: 'network', body: 'Explore the concepts directly related to a selected location — adjacent skills, associated tasks, neighbouring roles.' },
+  { n: '03', title: 'Pathfind', icon: 'route', body: 'Trace possible routes between two locations, such as a current skill profile and a target occupation.' },
+  { n: '04', title: 'Evaluate', icon: 'check', body: 'Rank possible routes under an explicit policy, making the basis for comparison visible and reviewable.' },
+];
+---
+
+<Band id="capabilities" surface="feature" label="One assistant, four capabilities" texture="constellation">
+  <h2 id="capabilities-heading" class="max-w-2xl font-display text-3xl font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem]">Four connected ways of moving through the graph.</h2>
+  <ol class="mt-12 grid gap-px bg-border md:grid-cols-2 lg:grid-cols-4">
+    {capabilities.map((item) => (
+      <li class="group relative bg-background p-7 transition-colors">
+        <span aria-hidden="true" class="absolute left-0 top-0 h-0.5 w-full bg-graph-mint opacity-25 transition-opacity group-hover:opacity-100"></span>
+        <div class="flex items-center gap-3">
+          <Icon name={item.icon} class="h-[19px] w-[19px] text-graph-mint transition-colors group-hover:text-gold-action" />
+          <span class="label-tech">{item.n}</span>
+        </div>
+        <h3 class="mt-5 font-display text-2xl font-semibold tracking-tight">{item.title}</h3>
+        <p class="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">{item.body}</p>
+      </li>
+    ))}
+  </ol>
+</Band>

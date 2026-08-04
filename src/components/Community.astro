@@ -1,0 +1,29 @@
+---
+import Band from './Band.astro';
+import Icon from './Icon.astro';
+import Mark from './Mark.astro';
+---
+
+<Band id="community" surface="cta" texture="constellation">
+  <Mark class="h-10 w-10" />
+  <h2 id="community-heading" class="mt-7 max-w-2xl font-display text-3xl font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem]">Follow the work, or help shape it.</h2>
+  <div class="mt-12 grid gap-px bg-border sm:grid-cols-2">
+    <div class="bg-background p-7 sm:p-8">
+      <p class="label-tech text-gold-text">For contributors</p>
+      <p class="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">Issues, discussions and pull requests happen in the open on GitHub.</p>
+      <a href="https://github.com/LFX-Talent-Angels" target="_blank" rel="noreferrer noopener" class="mt-6 inline-flex min-h-11 items-center gap-2 border border-gold-action bg-gold-action px-5 py-3 text-sm font-medium text-on-gold transition-opacity hover:opacity-90">
+        <Icon name="github" />
+        Talent Angels on GitHub
+        <Icon name="external" class="h-3.5 w-3.5" />
+      </a>
+    </div>
+    <div class="bg-background p-7 sm:p-8">
+      <p class="label-tech text-gold-text">For the community</p>
+      <p class="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">Talent Angels is part of the wider LF Decentralized Trust ecosystem of open projects.</p>
+      <a href="https://www.lfdecentralizedtrust.org/" target="_blank" rel="noreferrer noopener" class="mt-6 inline-flex min-h-11 items-center gap-2 border border-border px-5 py-3 text-sm font-medium transition-colors hover:border-gold-action hover:text-gold-text">
+        LF Decentralized Trust
+        <Icon name="external" class="h-3.5 w-3.5" />
+      </a>
+    </div>
+  </div>
+</Band>

@@ -1,0 +1,27 @@
+---
+interface Props {
+  id: string;
+  surface: 'canvas' | 'raised' | 'feature' | 'reading' | 'cta';
+  label?: string;
+  texture?: 'grid' | 'constellation';
+  divided?: boolean;
+}
+
+const { id, surface, label, texture, divided = true } = Astro.props;
+---
+
+<section
+  id={id}
+  aria-labelledby={`${id}-heading`}
+  class:list={[
+    `surface-${surface}`,
+    divided && 'border-t border-border',
+    texture === 'grid' && 'texture-grid',
+    texture === 'constellation' && 'texture-constellation',
+  ]}
+>
+  <div class="mx-auto max-w-6xl px-5 py-16 sm:py-24">
+    {label && <p class="label-tech mb-9 text-gold-text">{label}</p>}
+    <slot />
+  </div>
+</section>
