@@ -1,0 +1,9 @@
+# Code owners for TA-site.
+#
+# Mentees own the pages and components. These paths set policy or control
+# what ships, so they need mentor review.
+
+/.github/       @nosoypoot
+/CLAUDE.md      @nosoypoot
+/AGENTS.md      @nosoypoot
+/astro.config.mjs @nosoypoot
