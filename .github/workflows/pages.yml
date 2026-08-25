@@ -1,0 +1,48 @@
+# Publishes the built site to GitHub Pages on every push to main.
+#
+# The job names are prefixed rather than called `build`, because CI already
+# publishes a `build` status check and main's protection requires it by name.
+# Two workflows contributing a context with the same name is ambiguous.
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never cancel a running deploy; queue at most one behind it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  pages-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  pages-deploy:
+    needs: pages-build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
